@@ -27,8 +27,11 @@ function Auth() {
             password: inputs.password
         }).catch(err => console.log(err))
         console.log(res);
-        let data = await res.data;
-        console.log(data);
+        let data = null;
+        if (res) {
+            data = await res.data;
+            console.log(data);
+        }
         return data;
     }
 
