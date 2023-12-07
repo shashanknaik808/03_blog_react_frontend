@@ -1,4 +1,3 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 const Auth = () => {
@@ -8,13 +7,18 @@ const Auth = () => {
         email: "",
         password: ""
     });
-    
+
     const [isSignup, setIsSignup] = useState(false);
 
+    const handleChange = ({ target }) => {
+        setInputs((prevInputs) => ({
+            ...prevInputs,
+            [target.name]: target.value
+        }));
+    };
+
     return (
-        <div>
-            Hello
-        </div>
+        shoot & scoot
     );
 }
 
