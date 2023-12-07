@@ -19,7 +19,7 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/auth" element={<Auth setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/add" element={<AddBlog />} />
           <Route path="/myBlogs" element={<UserBlogs />} />
