@@ -22,17 +22,19 @@ function Header(props) {
                         Blog App
                     </Typography>
 
-                    {props.isLoggedIn && <Box display={"flex"} marginLeft={'auto'} marginRight={"auto"}>
-                        <Tabs textColor='inherite' value={value} onChange={(e, val) => setValue(val)}>
-                            <Tab LinkComponent={Link} to="/blogs" label="All Blogs" />
-                            <Tab LinkComponent={Link} to="/myBlogs" label="My Blogs" />
-                        </Tabs>
-                    </Box>}
+                    {props.isLoggedIn &&
+                        <Box display={"flex"} marginLeft={'auto'} marginRight={"auto"}>
+                            <Tabs textColor='inherite' value={value} onChange={(e, val) => setValue(val)}>
+                                <Tab LinkComponent={Link} to="/blogs" label="All Blogs" />
+                                <Tab LinkComponent={Link} to="/myBlogs" label="My Blogs" />
+                            </Tabs>
+                        </Box>}
 
                     <Box display={"flex"} marginLeft={"auto"}>
                         <Button LinkComponent={Link} to="/auth" variant='contained' sx={{ margin: 1, borderRadius: 10 }} color='warning'>Login</Button>
                         <Button LinkComponent={Link} to="/auth" variant='contained' sx={{ margin: 1, borderRadius: 10 }} color='warning'>Signup</Button>
-                        <Button LinkComponent={Link} to="/auth" variant='contained' sx={{ margin: 1, borderRadius: 10 }} color='warning'>Logout</Button>
+                        {props.isLoggedIn &&
+                            <Button LinkComponent={Link} to="/auth" variant='contained' sx={{ margin: 1, borderRadius: 10 }} color='warning'>Logout</Button>}
                     </Box>
                 </Toolbar>
             </AppBar>
