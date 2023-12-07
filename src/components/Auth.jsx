@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 
-function Auth() {
+function Auth(props) {
     const [inputs, setInputs] = useState({
         name: "",
         email: "",
@@ -38,39 +38,44 @@ function Auth() {
             e.preventDefault();
             console.log(inputs);
             if (isSignup) {
-                sendRequest("signup").then(data => console.log(data))
+                sendRequest("signup")
+                    .then(data => console.log(data))
+                    .catch(err => "Error in signup")
             } else {
-                sendRequest("login").then(data => console.log(data))
+                sendRequest("login")
+                    .then(data => console.log(data))
+                    .catch(err => "Error in login")
             }
         }
-
-        return (
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <Box
-                        maxWidth={400}
-                        display={"flex"}
-                        flexDirection={"column"}
-                        alignItems={"center"}
-                        justifyContent={"center"}
-                        boxShadow={"10px 10px 20px #ccc"}
-                        padding={3}
-                        margin={"auto"}
-                        marginTop={5}
-                        borderRadius={5}
-                    >
-                        <Typography variant='h2' padding={3} textAlign={"center"}>{isSignup ? "Signup" : "Login"}</Typography>
-
-                        {isSignup &&
-                            <TextField name='name' onChange={handleChange} value={inputs.name} type='name' placeholder='Name' margin='normal' />}{" "}
-                        <TextField name='email' onChange={handleChange} type='email' value={inputs.email} placeholder='Email' margin='normal' />
-                        <TextField name='password' onChange={handleChange} type='password' value={inputs.password} placeholder='Password' margin='normal' />
-                        <Button type='submit' variant='contained' sx={{ borderRadius: 3, marginTop: 3 }} color='warning'>Submit</Button>
-                        <Button onClick={() => setIsSignup(!isSignup)} sx={{ borderRadius: 3, marginTop: 3 }}>Change to {isSignup ? "Login" : "Signup"}</Button>
-                    </Box>
-                </form>
-            </div>
-        );
     }
 
-    export default Auth;
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <Box
+                    maxWidth={400}
+                    display={"flex"}
+                    flexDirection={"column"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                    boxShadow={"10px 10px 20px #ccc"}
+                    padding={3}
+                    margin={"auto"}
+                    marginTop={5}
+                    borderRadius={5}
+                >
+                    <Typography variant='h2' padding={3} textAlign={"center"}>{isSignup ? "Signup" : "Login"}</Typography>
+
+                    {isSignup &&
+                        <TextField name='name' onChange={handleChange} value={inputs.name} type='name' placeholder='Name' margin='normal' />}{" "}
+                    <TextField name='email' onChange={handleChange} type='email' value={inputs.email} placeholder='Email' margin='normal' />
+                    <TextField name='password' onChange={handleChange} type='password' value={inputs.password} placeholder='Password' margin='normal' />
+                    <Button type='submit' variant='contained' sx={{ borderRadius: 3, marginTop: 3 }} color='warning'>Submit</Button>
+                    <Button onClick={() => setIsSignup(!isSignup)} sx={{ borderRadius: 3, marginTop: 3 }}>Change to {isSignup ? "Login" : "Signup"}</Button>
+                </Box>
+            </form>
+        </div>
+    );
+}
+
+export default Auth;
