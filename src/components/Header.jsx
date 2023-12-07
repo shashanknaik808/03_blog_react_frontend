@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 
 function Header(props) {
-    const [value, setValue] = useState();
+    const [value, setValue] = useState(1);
 
     return (
         <div>

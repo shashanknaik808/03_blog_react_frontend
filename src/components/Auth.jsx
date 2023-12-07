@@ -15,16 +15,19 @@ function Auth(props) {
         setInputs((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
-        })
-        );
-    };
+        }));
+    }
 
     async function sendRequest(type) {
-        const res = await axios.post(`http://localhost:5000/api/user/${type}`, {
-            name: inputs.name,
-            email: inputs.email,
-            password: inputs.password
-        }).catch(err => {
+        try {
+            const res = await axios.post(`http://localhost:5000/api/user/${type}`, {
+                name: inputs.name,
+                email: inputs.email,
+                password: inputs.password
+            });
+
+            console.log(res.data);
+        } catch (err) {
             if (err.response.request.status === 404) {
                 alert("User does not exist");
                 props.setIsLoggedIn(false);
@@ -32,22 +35,23 @@ function Auth(props) {
                 alert("Invalid password");
                 props.setIsLoggedIn(true);
             }
-        })
-
-        function handleSubmit(e) {
-            e.preventDefault();
-            console.log(inputs);
-            if (isSignup) {
-                sendRequest("signup")
-                    .then(data => console.log(data))
-                    .catch(err => "Error in signup")
-            } else {
-                sendRequest("login")
-                    .then(data => console.log(data))
-                    .catch(err => "Error in login")
-            }
         }
     }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log(inputs);
+        if (isSignup) {
+            sendRequest("signup")
+                .then(data => console.log(data))
+                .catch(err => console.error("Error in signup", err));
+        } else {
+            sendRequest("login")
+                .then(data => console.log(data))
+                .catch(err => console.error("Error in login", err));
+        }
+    }
+
 
     return (
         <div>
@@ -77,5 +81,6 @@ function Auth(props) {
         </div>
     );
 }
+
 
 export default Auth;
