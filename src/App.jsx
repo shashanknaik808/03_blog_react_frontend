@@ -5,10 +5,13 @@ import Auth from './components/Auth';
 import BlogDetail from './components/BlogDetail';
 import Header from './components/Header';
 import UserBlogs from './components/UserBlogs';
-import React from 'react';
+import React, { useState } from 'react';
 import Blogs from './components/Blogs';
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <React.Fragment >
       <header>
