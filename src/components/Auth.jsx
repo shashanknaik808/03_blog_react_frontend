@@ -1,20 +1,23 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { Box, Button, TextField, Typography } from '@mui/material';
 
-const Auth = () => {
+function Auth() {
     const [inputs, setInputs] = useState({
         name: "",
         email: "",
         password: ""
     });
+
     const [isSignup, setIsSignup] = useState(false);
 
-    const handleChange = ({ target }) => {
-        setInputs((prevInputs) => ({
-            ...prevInputs,
-            [target.name]: target.value
-        }));
-    };
+    function handleChange(e) {
+        setInputs(function (prevState) {
+            return {
+                ...prevState,
+                [e.target.name]: e.target.value
+            };
+        });
+    }
 
     return (
         <div>
