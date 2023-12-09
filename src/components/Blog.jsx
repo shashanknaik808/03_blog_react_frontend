@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Blog(props) {
 
@@ -20,6 +21,16 @@ function Blog(props) {
 
     function handleEdit(e) {
         navigate(`/myBlogs/${props.id}`)
+    }
+
+    async function deleteRequest() {
+        const res = await axios.delete(`http://localhost:5000/api/blog/${props.id}`)
+            .catch(err => console.log(err))
+        const data = await res.data;
+        return data;
+    }
+    function handleDelete() {
+        deleteRequest().then(data => console.log(data))
     }
 
     return (
