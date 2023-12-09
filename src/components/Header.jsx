@@ -44,6 +44,7 @@ function Header(props) {
                                     LinkComponent={Link}
                                     to="/myBlogs"
                                     label="My Blogs" />
+                                <Tab LinkComponent={Link} to="/blogs/add" label="Add Blogs" />
                             </Tabs>
                         </Box>
                     )}
