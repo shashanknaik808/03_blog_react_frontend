@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Blogs() {
 
@@ -11,6 +11,11 @@ function Blogs() {
         const data = await res.data;
         return data;
     };
+
+    useEffect(() => {
+        sendRequest()
+            .then((data) => console.log(data));
+    }, []);
 
     return (
         <div>Blogs</div>
