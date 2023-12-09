@@ -1,4 +1,4 @@
-import { Avatar, Card, CardHeader } from '@mui/material'
+import { Avatar, Card, CardHeader, CardMedia } from '@mui/material'
 import React from 'react';
 
 function Blog() {
@@ -14,6 +14,13 @@ function Blog() {
                     title="Shrimp and Chorizo Paella"
                     subheader="September 14, 2016"
                 />
+                <CardMedia
+                    component="img"
+                    height="194"
+                    image="/static/images/cards/paella.jpg"
+                    alt="Paella dish"
+                />
+
             </Card>
         </div>
     )
