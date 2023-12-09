@@ -14,6 +14,14 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useNavigate } from 'react-router-dom';
 
 function Blog(props) {
+
+    console.log(props.title, props.isUser);
+    const navigate = useNavigate();
+
+    function handleEdit(e) {
+        navigate(`/myBlogs/${props.id}`)
+    }
+
     return (
         <div>
             <Card sx={{
