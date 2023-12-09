@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import Blog from './Blog';
+import React from 'react'
+import { useEffect } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
+import Blog from './Blog';
 
 function UserBlog() {
-    const [blogs, setBlogs] = useState([]);
+    const [user, setUser] = useState();
     const id = localStorage.getItem("userID");
 
     async function sendRequest() {
@@ -13,12 +15,19 @@ function UserBlog() {
         return data;
     }
 
+    useEffect(() => {
+        sendRequest()
+            .then((data) => setUser(data.user))
+    }, [])
+
     return (
         <div>
             <>
-                {(blogs.length !== 0) && blogs.map((blog, index) => (
-                    <Blog
-                        user={blog.user.name}
+                {" "}
+                {user && user.blogs && user.blogs.map((blog, index) => (
+                    <Blog key={index}
+                        isUser={true}
+                        user={user.name}
                         description={blog.description}
                         imageURL={blog.image}
                         title={blog.title} />
