@@ -14,9 +14,9 @@ function Blogs() {
     };
 
     useEffect(() => {
-        sendRequest()
-            .then((data) => setBlogs.log(blogs));
+        sendRequest().then((data) => console.log(data));  // Correct: logs the data received from sendRequest
     }, []);
+
 
     return (
         <div>

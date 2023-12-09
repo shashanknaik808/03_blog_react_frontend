@@ -4,9 +4,9 @@ import AddBlog from './components/AddBlog';
 import Auth from './components/Auth';
 import BlogDetail from './components/BlogDetail';
 import Header from './components/Header';
-import UserBlogs from './components/UserBlogs';
 import React, { useState } from 'react';
 import Blogs from './components/Blogs';
+import UserBlog from './components/UserBlog';
 
 function App() {
 
@@ -22,7 +22,7 @@ function App() {
           <Route path="/auth" element={<Auth setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/add" element={<AddBlog />} />
-          <Route path="/myBlogs" element={<UserBlogs />} />
+          <Route path="/myBlogs" element={<UserBlog />} />
           <Route path="/myBlogs/:id" element={<BlogDetail />} />
         </Routes>
       </main>

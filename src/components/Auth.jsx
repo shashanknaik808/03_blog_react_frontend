@@ -18,23 +18,24 @@ function Auth(props) {
     }
 
     async function sendRequest(type) {
-        const res = await axios.post(`http://localhost:5000/api/user/${type}`, {
-            name: inputs.name,
-            email: inputs.email,
-            password: inputs.password
-        }).catch(err => {
-            if (err.response.request.status === 404) {
-                alert("User DOes not exist");
+        try {
+            const res = await axios.post(`http://localhost:5000/api/user/${type}`, {
+                name: inputs.name,
+                email: inputs.email,
+                password: inputs.password
+            });
+            return res.data;
+        } catch (err) {
+            console.error("Error in sendRequest:", err);
+            if (err.response && err.response.status === 404) {
+                alert("User does not exist");
+                props.setIsLoggedIn(false);
+            } else if (err.response && err.response.status === 400) {
+                alert("Invalid password");
                 props.setIsLoggedIn(false);
             }
-            else if (err.response.request.status === 400) {
-                alert("Invalid Password");
-                props.setIsLoggedIn(false);
-            }
-        });
-
-        let data = await res.data;
-        return data;
+            throw err;
+        }
     }
 
     function handleSubmit(e) {
@@ -42,16 +43,19 @@ function Auth(props) {
         if (isSignup) {
             sendRequest("signup")
                 .then(data => navigate("/auth"))
-                .catch(err => "There is some mistake in signup");
+                .catch(err => console.error("Error in signup:", err));
         } else {
             sendRequest('login')
-                .then(data =>
-                    localStorage.setItem("userID", data.user._id))
                 .then(data => {
-                    props.setIsLoggedIn(true);
-                    navigate("/blogs")
+                    if (data && data.message === 'Login Successful') {
+                        console.log("Login successful");
+                        props.setIsLoggedIn(true);
+                        navigate("/blogs");
+                    } else {
+                        console.error("Invalid response format from login request:", data);
+                    }
                 })
-                .catch(err => "there is some mistake in login");
+                .catch(err => console.error("Error in login:", err));
         }
     }
 
