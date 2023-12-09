@@ -45,7 +45,7 @@ function Blog(props) {
                 {props.isUser && (
                     <Box display='flex'>
                         <IconButton onClick={handleEdit} sx={{ marginLeft: 'auto' }}><EditIcon /></IconButton>
-                        <IconButton onClick={handleEdit}><DeleteForeverIcon /></IconButton>
+                        <IconButton onClick={handleDelete}><DeleteForeverIcon /></IconButton>
                     </Box>
                 )}
                 <CardHeader
