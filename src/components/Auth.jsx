@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 function Auth(props) {
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         name: "",
         email: "",
@@ -47,6 +49,7 @@ function Auth(props) {
                 .catch(err => console.error("Error in signup", err));
         } else {
             sendRequest("login")
+                .then(data => localStorage.setItem("userID", data.user._id))
                 .then(data => console.log(data))
                 .catch(err => console.error("Error in login", err));
         }
