@@ -15,14 +15,20 @@ function Blogs() {
 
     useEffect(() => {
         sendRequest()
-            .then((data) => console.log(blogs));
+            .then((data) => setBlogs.log(blogs));
     }, []);
 
     return (
         <div>
-            <Blog />
-            <Blog />
-            <Blog />
+            {(blogs.length !== 0) &&
+                blogs.map((blog, index) => (
+                    <Blog
+                        userName={blog.user.name}
+                        description={blog.description}
+                        imageURL={blog.image}
+                        title={blog.title} />
+                ))
+            }
         </div>
     )
 }
