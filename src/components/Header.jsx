@@ -13,6 +13,11 @@ import {
 function Header(props) {
     const [value, setValue] = useState(1);
 
+    function handleLogout() {
+        localStorage.clear();
+        props.setIsLoggedIn(false);
+    }
+
     return (
         <div>
             <AppBar
@@ -69,6 +74,7 @@ function Header(props) {
                         }
                         {props.isLoggedIn && (
                             <Button
+                                onClick={handleLogout}
                                 LinkComponent={Link}
                                 to="/auth"
                                 variant="contained"
