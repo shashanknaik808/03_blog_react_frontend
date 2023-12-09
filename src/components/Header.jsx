@@ -28,7 +28,7 @@ function Header(props) {
                     {props.isLoggedIn && (
                         <Box display={'flex'} marginLeft={'auto'} marginRight={'auto'}>
                             <Tabs
-                                textColor="inherite"
+                                textColor="inherit"
                                 value={value}
                                 onChange={(e, val) => setValue(val)}>
                                 <Tab
