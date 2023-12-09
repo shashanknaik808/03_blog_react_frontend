@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Blog from './Blog';
 
 function Blogs() {
 
@@ -14,11 +15,15 @@ function Blogs() {
 
     useEffect(() => {
         sendRequest()
-            .then((data) => console.log(data));
+            .then((data) => console.log(blogs));
     }, []);
 
     return (
-        <div>Blogs</div>
+        <div>
+            <Blog />
+            <Blog />
+            <Blog />
+        </div>
     )
 }
 
