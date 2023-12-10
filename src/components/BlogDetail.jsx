@@ -27,11 +27,12 @@ function BlogDetail(props) {
 
     async function fetchDetails() {
         const res = await axios
-            .get(`http://localhost:5000/api/blog/${id}`)
-            .catch(err => console.log(err))
+            .get(`http://localhost:5000/api/blog/${id}`)  // Adjust the endpoint
+            .catch(err => console.log(err));
         const data = await res.data;
         return data;
     }
+
     useEffect(() => {
         fetchDetails().then(data => {
             setBlog(data.blog)

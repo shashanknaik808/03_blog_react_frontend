@@ -4,11 +4,12 @@ import {
     AppBar,
     Box,
     Button,
-    Tab,
-    Tabs,
     Toolbar,
     Typography,
 } from '@mui/material';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+
 
 function Header(props) {
     const [value, setValue] = useState(1);

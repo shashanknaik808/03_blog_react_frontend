@@ -21,7 +21,7 @@ function Blogs() {
             {blogs.length !== 0 &&
                 blogs.map((blog, index) => (
                     <Blog
-                        key={index} 
+                        key={index}
                         userName={blog.user.name}
                         description={blog.description}
                         imageURL={blog.image}

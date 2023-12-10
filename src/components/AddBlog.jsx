@@ -22,12 +22,13 @@ function AddBlog() {
         const res = await axios.post(`http://localhost:5000/api/blog/add`, {
             title: inputs.title,
             description: inputs.description,
-            image: inputs.imageURL,
+            imageURL: inputs.imageURL,
             user: localStorage.getItem("userID")
-        }).catch(err => console.log(err))
+        }).catch(err => console.log(err));
         const data = await res.data;
         return data;
     }
+
 
     function handleSubmit(e) {
         e.preventDefault();
