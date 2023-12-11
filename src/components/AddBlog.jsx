@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
-import { Box, Button, Typography, InputLabel, TextField } from '@mui/material';
+import { Box, Button, Typography, InputLabel, TextField, FormControl } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const labelStyle = { mb: 1, mt: 2, fontSize: '24px', fontWeight: 'bold' }
+const labelStyle = { mb: 1, mt: 2, fontSize: '24px', fontWeight: 'bold' };
 
 function AddBlog() {
-
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         title: "", description: "", imageURL: ""
-    })
+    });
 
     function handleChange(e) {
         setInputs((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
-        })
-        );
+        }));
     }
 
     async function sendRequest() {
         const res = await axios.post(`http://localhost:5000/api/blog/add`, {
             title: inputs.title,
             description: inputs.description,
-            imageURL: inputs.imageURL,
+            image: inputs.imageURL,
             user: localStorage.getItem("userID")
-        }).catch(err => console.log(err));
+        }).catch(err => console.log(err))
         const data = await res.data;
         return data;
     }
@@ -33,7 +33,9 @@ function AddBlog() {
     function handleSubmit(e) {
         e.preventDefault();
         console.log(inputs);
-        sendRequest().then(data => console.log(data))
+        sendRequest()
+            .then(data => console.log(data))
+            .then(() => navigate("/blogs"))
     }
 
     return (
@@ -51,22 +53,33 @@ function AddBlog() {
                     flexDirection={'column'}
                     width={"80%"}
                 >
-                    <Typography fontWeight={'bold'}
-                        padding={3}
-                        color="grey"
-                        variant='h2'
-                        textAlign='center'>Post Your Blog</Typography>
-                    <InputLabel sx={labelStyle}>Title</InputLabel>
+                    <Typography
+                        sx={{
+                            fontWeight: 'bold',
+                            padding: 3,
+                            color: 'grey',
+                            fontSize: 'h2',
+                            textAlign: 'center',
+                        }}
+                    >
+                        Post Your Blog
+                    </Typography>
+
+                    <FormControl margin="dense" />
+
+                    <InputLabel sx={{ ...labelStyle, fontFamily: 'Arial, sans-serif' }}>Title</InputLabel>
                     <TextField name='title' onChange={handleChange} value={inputs.title} margin='auto' variant='outlined' />
-                    <InputLabel sx={labelStyle}>Description</InputLabel>
+                    <InputLabel sx={{ ...labelStyle, fontFamily: 'Arial, sans-serif' }}>Description</InputLabel>
                     <TextField name='description' onChange={handleChange} value={inputs.description} margin='auto' variant='outlined' />
-                    <InputLabel sx={labelStyle}>Image</InputLabel>
+                    <InputLabel sx={{ ...labelStyle, fontFamily: 'Arial, sans-serif' }}>Image</InputLabel>
                     <TextField name='imageURL' onChange={handleChange} value={inputs.imageURL} margin='auto' variant='outlined' />
-                    <Button type="submit" sx={{ mt: 2, borderRadius: 4 }} variant='contained' color='warning'>Submit</Button>
+                    <Button type="submit" sx={{ mt: 2, borderRadius: 4 }} variant='contained' color='warning'>
+                        Submit
+                    </Button>
                 </Box>
             </form>
         </div>
-    )
+    );
 }
 
 export default AddBlog;

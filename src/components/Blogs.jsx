@@ -22,7 +22,7 @@ function Blogs() {
                 blogs.map((blog, index) => (
                     <Blog
                         key={index}
-                        userName={blog.user.name}
+                        user={blog.user.name}
                         description={blog.description}
                         imageURL={blog.image}
                         title={blog.title}
